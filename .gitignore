@@ -1,0 +1,7 @@
+.idea/
+Log/
+addr.db
+peers.recent
+node_module/
+*.tar.gz
+main
