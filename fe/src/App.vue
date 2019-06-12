@@ -18,7 +18,7 @@
                 <tr v-for="node in nodes" v-bind:key="node.ip">
                     <td style="width: 180px;">{{ node.ip }}</td>
                     <td style="width: 80px;">{{ node.port }}</td>
-                    <td style="min-width: 100px;">{{ node.height }}</td>
+                    <td style="width: 100px; min-width: 100px;">{{ node.height }}</td>
                     <td style="width: 100px;">{{ node.services === 1 ? 'Verify' : 'Service' }}</td>
                     <td style="width: 100px; min-width: 100px">{{ node.country }}</td>
                     <td style="width: 100px;">{{ node.can_connect }}</td>
