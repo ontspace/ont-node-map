@@ -19,8 +19,7 @@ func StartRestServer(port uint, disableCors bool) error {
 	r.Static("/css", "fe/dist/css")
 	r.StaticFile("/favicon.ico", "fe/dist/favicon.ico")
 	r.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.html", gin.H{
-		})
+		c.HTML(http.StatusOK, "index.html", gin.H{})
 	})
 	r.GET("/api/nodes", func(c *gin.Context) {
 		nodes := storage.ListAllNodes()
