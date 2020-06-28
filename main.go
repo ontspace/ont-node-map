@@ -1,24 +1,21 @@
 package main
 
 import (
+	"map/p2pserver"
+	"map/storage"
+	"map/web"
 	"os"
 	"os/signal"
 	"runtime"
 	"syscall"
 
-	"map/p2pserver"
-	"map/storage"
-	"map/web"
-
-	"github.com/urfave/cli"
-
 	"github.com/ethereum/go-ethereum/common/fdlimit"
 	alog "github.com/ontio/ontology-eventbus/log"
-
 	"github.com/ontio/ontology/cmd"
 	"github.com/ontio/ontology/cmd/utils"
 	"github.com/ontio/ontology/common/config"
 	"github.com/ontio/ontology/common/log"
+	"github.com/urfave/cli"
 )
 
 func main() {

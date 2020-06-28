@@ -155,8 +155,6 @@ func (self *MsgHandler) HandlePeerMessage(ctx *p2p.Context, msg msgTypes.Message
 		msgType := msg.CmdType()
 		if msgType == msgCommon.VERACK_TYPE || msgType == msgCommon.VERSION_TYPE {
 			log.Infof("receive message: %s from peer %s", msgType, ctx.Sender().GetAddr())
-		} else {
-			log.Warn("unknown message handler for the msg: ", msgType)
 		}
 	}
 }
