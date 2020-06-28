@@ -5,3 +5,4 @@ peers.recent
 node_module/
 *.tar.gz
 main
+node
