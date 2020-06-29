@@ -24,6 +24,14 @@ type NodeInfo struct {
 	Country        string  `json:"country"`
 }
 
+func (n *NodeInfo) RemoteListenAddress() string {
+	sb := strings.Builder{}
+	sb.WriteString(n.Ip)
+	sb.WriteString(":")
+	sb.WriteString(strconv.Itoa(int(n.Port)))
+	return sb.String()
+}
+
 func ParseIpPort(addr string) (string, int, error) {
 	i := strings.Index(addr, ":")
 	if i < 0 {

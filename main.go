@@ -1,22 +1,21 @@
 package main
 
 import (
-	"github.com/ethereum/go-ethereum/common/fdlimit"
-	alog "github.com/ontio/ontology-eventbus/log"
-	"github.com/ontio/ontology/cmd"
-	"github.com/ontio/ontology/cmd/utils"
-	"github.com/ontio/ontology/common/config"
-	"github.com/ontio/ontology/common/log"
-	hserver "github.com/ontio/ontology/http/base/actor"
-	"github.com/urfave/cli"
 	"map/p2pserver"
-	p2pactor "map/p2pserver/actor/server"
 	"map/storage"
 	"map/web"
 	"os"
 	"os/signal"
 	"runtime"
 	"syscall"
+
+	"github.com/ethereum/go-ethereum/common/fdlimit"
+	alog "github.com/ontio/ontology-eventbus/log"
+	"github.com/ontio/ontology/cmd"
+	"github.com/ontio/ontology/cmd/utils"
+	"github.com/ontio/ontology/common/config"
+	"github.com/ontio/ontology/common/log"
+	"github.com/urfave/cli"
 )
 
 func main() {
@@ -34,8 +33,7 @@ func setupAPP() *cli.App {
 	app.Action = Start
 	app.Version = "1.0.0"
 	app.Copyright = "Copyright in 2019 @FYZ"
-	app.Commands = []cli.Command{
-	}
+	app.Commands = []cli.Command{}
 	app.Flags = []cli.Flag{
 		//common setting
 		cli.StringFlag{
@@ -93,19 +91,16 @@ func Start(ctx *cli.Context) {
 		log.Errorf("initConfig error: %s", err)
 		return
 	}
-	p2p := p2pserver.NewServer()
 
-	p2pActor := p2pactor.NewP2PActor(p2p)
-	p2pPID, err := p2pActor.Start()
+	p2p, err := p2pserver.NewServer(nil)
 	if err != nil {
+		log.Errorf("instance p2p server err: %v", err)
 		return
 	}
-	p2p.SetPID(p2pPID)
-	err = p2p.Start()
-	if err != nil {
+	if err := p2p.Start(); err != nil {
+		log.Errorf("start p2p server err: %v", err)
 		return
 	}
-	hserver.SetNetServerPID(p2pPID)
 	p2p.WaitForPeersStart()
 	log.Infof("P2P init success")
 
